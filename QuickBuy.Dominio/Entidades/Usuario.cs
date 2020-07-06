@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace QuickBuy.Dominio
 {
-    public class Usuario
+    public class Usuario : Entidade
     {
         public int Id { get; set; }
         public string Email { get; set; }
@@ -12,5 +12,14 @@ namespace QuickBuy.Dominio
         public string SobreNome { get; set; }
 
         public ICollection<Pedido> Pedidos { get; set; }
+
+        public override void Validate()
+        {
+            if (string.IsNullOrEmpty(Email))
+                AdicionarCritica("E-mail não informado");
+
+            if (string.IsNullOrEmpty(Senha))
+                AdicionarCritica("Senha não informado");
+        }
     }
 }
